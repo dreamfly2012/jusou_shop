@@ -1,0 +1,15 @@
+<include file="Public/header" title="商品修改" description="" keywords="" />
+
+<include file="Public/leftnav_goods" />
+
+<div class="right_content container">
+    <div class="container">
+        <h2>商品编辑</h2>
+        <form name="form" id="form" enctype="multipart/form-data" action="{:U('Goods/updateGoods')}" method="post" class="form" role="form">
+            <include file="goods_form" />
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />
+

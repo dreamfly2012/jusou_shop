@@ -1,0 +1,42 @@
+<include file="Public/header" keywords="登陆" title="登陆" description=""/>
+
+<div class="container-fluid login-form login">
+    <section>
+        <h1><strong>巨搜商店</strong> </h1>
+        <form action="{:U('Login/loginHandle')}" method="post" id="myform" class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="user_name" class="col-sm-3 control-label">用户名</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="user_name" name="user_name" placeholder="用户名">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-sm-3 control-label">密码</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" id="password" name="password" placeholder="密码">
+              </div>
+            </div>
+            <button class="blue">登陆</button>
+        </form>
+        <p><a href="{:U('Login/findPassword')}">忘记密码?</a></p>
+    </section>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/Admin/jqvalidate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/jqvalidate/messages_zh.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#myform").validate({
+            rules: {
+                user_name: {
+                    required: true
+                },
+                password:{
+                    required:true
+                }
+            }
+        });
+    });
+</script>
+
+<include file="Public/footer" />

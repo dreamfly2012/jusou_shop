@@ -1,0 +1,77 @@
+<include file="Public/header" title="会员添加" description="" keywords="" />
+
+<include file="Public/leftnav_member" />
+
+<div class="right_content">
+    <php>if($is_search):</php>
+    <div class="container">
+        <h2>会员添加</h2>
+        <form name="form" id="form" action="{:U('Member/searchUser')}" method="post" class="form" role="form">
+            <div class="container">
+                <div class="form-group">
+                    <label for="email">
+                        用户Email
+                    </label>
+                    <input type="text" name="email" id="email" value="" class="form-control" placeholder="用户email"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="user_name">
+                        用户名称
+                    </label>
+                    <input type="text" name="user_name" id="user_name" value="" class="form-control" placeholder="用户名称"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value=" 检索 " class="form-control btn btn-primary">
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <php>else:</php>
+    <div class="container">
+        <h2>会员添加</h2>
+        <form name="form" id="form" action="{:U('Member/addMember')}" method="post" class="form" role="form">
+            <div class="container">
+                <div class="form-group">
+                    <label>用户名：</label>
+                    <span class="form-control">{$user.user_name}</span>
+                </div>
+
+                <div class="form-group">
+                    <label>邮箱：</label>
+                    <span class="form-control">{$user.email}</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="rank">
+                        会员等级
+                    </label>
+                    <select name="rank" id="rank" class="form-control">
+                        <foreach name="rank" item="rank">
+                            <option value="{$rank.rank_id}">{$rank.rank_name}</option>
+                        </foreach>
+                    </select>
+                    <p class="help-block">会员等级从左侧导航添加</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="score">
+                        会员积分
+                    </label>
+                    <input type="text" name="score" id="score" value="0" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <input type="hidden" name="user_id" value="{$user.user_id}" />
+                    <input type="submit" value=" 确认添加 " class="form-control btn btn-primary">
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <php>endif;</php>
+</div>
+
+<include file="Public/footer" />

@@ -1,0 +1,123 @@
+<include file="Public/header" title="巨搜商店" description="这是一个B2C,C2C的平台,在这里你不仅是买家,而且还是卖家,你可以经营属于自己的店铺."
+         keywords="B2C,C2C,O2O,在线交易,线下交易"/>
+
+<!-- Container -->
+<div class="container">
+	<div class="col-md-6 col-sm-12 col-xs-12">
+		<!--地址信息- -->
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	            <a href="{:U('Order/checkout')}">
+	                <div class="checkout-section"><span>1</span> 地址信息 <strong><i class="fa fa-edit"></i>编辑</strong> </div>
+	            </a>
+	        </div>
+			<div class="panel-body">
+	            <div class="col-md-6 col-sm-12 col-xs-12">
+	                <ul class="list-group">
+	                    <li class="list-group-item active"><strong>送货位置</strong></li>
+	                    <li class="list-group-item">吉林省</li>
+	                    <li class="list-group-item">长春市</li>
+	                    <li class="list-group-item">高新区</li>
+	                    <li class="list-group-item">修正路232号101栋2楼504</li>
+	                </ul>
+	            </div>
+	            <div class="col-md-6 col-sm-12 col-xs-12">
+	                <ul class="list-group">
+	                    <li class="list-group-item active"><strong>联系电话</strong></li>
+	                    <li class="list-group-item">15888888888</li>
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+
+		<!-- 支付信息 -->
+	    <div class="panel panel-success">
+			<div class="panel-heading">
+				<span>2</span> 运送方式
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+	                <li class="list-group-item active"><strong>支付方式</strong></li>
+	                <li class="list-group-item">
+	                <form action="#">
+	                    <div class="delivery-option">
+	                        <input id="shipping-address" type="radio" name="shipping-address" value="1">
+	                        <label for="shipping-address" class="checkbox">支付宝 <span>¥9.99 <abbr class="sep">|</abbr> 时间3-5天</span></label>
+	                    </div>
+	                </form>
+	                </li>
+	            </ul>
+	        </div>
+        </div>
+
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <a href="{:U('Order/payOrder')}">继续</a>
+            </div>
+        </div>
+
+		<div class="panel panel-warning">
+			<a href="{:U('Order/payOrder')}">
+	            <div class="panel-heading">
+	                <span>3</span> 确认支付
+	            </div>
+            </a>
+		</div>
+
+	</div>
+
+
+
+
+	<!-- Checkout Content / End -->
+
+
+	<!-- 购物车信息 -->
+	<div class="col-md-6 col-sm-12 col-xs-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="checkout-section cart">购物车</div>
+			</div>
+			<div class="panel-body">
+				<table class="checkout table table-hover table-striped">
+					<tbody>
+						<tr>
+							<th class="hide-on-mobile">商品</th>
+							<th></th>
+							<th>价格</th>
+							<th>数量</th>
+							<th>小计</th>
+						</tr>
+								
+						<!-- Item #1 -->
+						<tr>
+							<td class="hide-on-mobile"><img src="__PUBLIC__/small_product_list_08.jpg" alt=""></td>
+							<td class="cart-title"><a href="">Converse All Star Trainers</a></td>
+							<td>¥79</td>
+							<td class="qty-checkout">3</td>
+							<td class="cart-total">¥237</td>
+						</tr>
+
+						<!-- Item #2 -->
+						<tr>
+							<td class="hide-on-mobile"><img src="./Trizzy_delivery_files/small_product_list_09.jpg" alt=""></td>
+							<td class="cart-title"><a href="http://vasterad.com/themes/trizzy/checkout-delivery.html#">Wool Two-Piece Suit</a></td>
+							<td>¥103</td>
+							<td class="qty-checkout">1</td>
+							<td class="cart-total">¥103</td>
+						</tr>
+						<tr>
+							<th class="checkout-totals">
+								<div class="checkout-subtotal">
+									总计: <span>$178.00</span>
+								</div>
+							</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<include file="Public/footer" />

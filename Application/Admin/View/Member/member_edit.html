@@ -1,0 +1,44 @@
+<include file="Public/header" title="会员添加" description="" keywords="" />
+
+<include file="Public/leftnav_member" />
+
+<div class="right_content">
+    <div class="container">
+        <h2>会员编辑</h2>
+        <form name="form" id="form" action="{:U('Member/updateMember')}" method="post" class="form" role="form">
+            <div class="form-group">
+                <label for="user_name">
+                    会员名
+                </label>
+                <span id="user_name" class="form-control">{$user.user_name}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="rank">
+                    会员等级
+                </label>
+                <select name="rank" id="rank" class="form-control">
+                    <volist name="rank" id="rank_info">
+                        <option value="{$rank_info.rank_id}" <if condition="$rank_info['rank_id'] eq $member['rank']">selected="selected"</if>>{$rank_info.rank_name}</option>
+                    </volist>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="score">
+                    会员积分
+                </label>
+                <input type="text" name="score" id="score" value="{$member.score}" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" name="id" value="{$member.id}" />
+                <input type="submit" value=" 提交 " class="form-control btn btn-primary">
+            </div>
+        </form>
+
+    </div>
+
+</div>
+
+<include file="Public/footer" />

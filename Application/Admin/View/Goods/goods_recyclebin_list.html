@@ -1,0 +1,189 @@
+<include file="Public/header" title="商品回收站展示页" description="" keywords=""/>
+
+<include file="Public/leftnav_goods"/>
+
+<div class="right_content">
+    <div class="table-responsive container">
+        <table class="table table-striped table-bordered">
+            <caption>回收站列表</caption>
+            <thead>
+            <tr>
+                <th>
+                    <input class="check_all" type="checkbox">
+                    <a href="{:U('Goods/goodsRecycleBinList',array('order_by'=>'goods_id','order_sort'=>$order_sort))}">编号</a>
+                </th>
+                <th>
+                    <a href="{:U('Goods/goodsRecycleBinList',array('order_by'=>'goods_name','order_sort'=>$order_sort))}"
+                       title="点击对列表排序">商品名称</a></th>
+                <th><a href="{:U('Goods/goodsRecycleBinList',array('order_by'=>'goods_sn','order_sort'=>$order_sort))}">货号</a>
+                </th>
+                <th>
+                    <a href="{:U('Goods/goodsRecycleBinList',array('order_by'=>'shop_price','order_sort'=>$order_sort))}">价格</a>
+                </th>
+                <th>
+                    <a href="{:U('Goods/goodsRecycleBinList',array('order_by'=>'goods_number','order_sort'=>$order_sort))}">库存</a>
+                </th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <foreach name="list" item="goods">
+                <tr>
+                    <td>
+                        <input type="checkbox" name="checkboxes[]" value="{$goods.goods_id}" readonly="readonly"
+                               class="single_check"/>
+                        <span>{$goods.goods_id}</span>
+                    </td>
+                    <td class="first-cell">
+                        <span>{$goods.goods_name}</span>
+                    </td>
+                    <td>
+                        <span>{$goods.goods_sn}</span>
+                    </td>
+                    <td>
+                        <span>{$goods.market_price}</span>
+                    </td>
+                    <td>
+                        <span>{$goods.goods_number}</span>
+                    </td>
+                    <td>
+                        <a href="javascript:;" class="revert_goods" data-id="{$goods.goods_id}" title="还原">还原</a>
+                        <a href="javascript:;" class="del_recycle" data-id="{$goods.goods_id}" title="彻底删除">彻底删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <div class="page_wrapper">
+            <ul class="pagination">{$page}</ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <legend>批量操作</legend>
+        <div class="form-group">
+            <select id="batchsel" class="form-control">
+                <option value="">请选择操作</option>
+                <option value="restore">还原</option>
+                <option value="delete">彻底删除</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="button" id="batch" value="确认" class="btn btn-primary form-control"/>
+        </div>
+    </div>
+
+</div>
+<script>
+    var __GOODS_REVERT__ = "{:U('Goods/goodsRevert')}";
+    var __DEL_RECYCLE_URL__ = "{:U('Goods/goodsDelRecycleBin')}";
+    var __BATCH_RECYCLE_URL__ = "{:U('Goods/recycleBatch')}";
+
+    function message(option) {
+        switch (option) {
+            case 'restore':
+                return "确认要批量从回收站还原商品吗?";
+                break;
+            case 'delete':
+                return "确认要真的批量删除商品?这将造成无法恢复！";
+                break;
+            default:
+                return "";
+        }
+    }
+
+    $(document).ready(function () {
+        //批量编辑商品回收站
+        $("#batchedit").click(function () {
+            var option = $("#batchsel").val();
+            var goods_ids = '';
+            $(".single_check").each(function () {
+                if ($(this).prop('checked') == true) {
+                    goods_ids += $(this).val() + ":";
+                }
+            });
+            if (option == '') {
+                alert("你没有选择任何操作");
+            } else if (goods_ids == '') {
+                alert("你没有选择任何商品");
+            } else {
+                var comfirm_message = message(option);
+
+                if (confirm(comfirm_message)) {
+                    $.ajax({
+                        url: __BATCH_RECYCLE_URL__,
+                        type: "POST",
+                        data: {'goods_ids': goods_ids, 'operation': option},
+                        dataType: "html",
+                        success: function (data) {
+                            if(data!="true"){
+                                if(option=="restore"){
+                                    alert('批量从回收站恢复商品失败');
+                                }else if(option=="delete"){
+                                    alert('批量彻底删除商品失败');
+                                }
+                            }else{
+                                if(option=="restore"){
+                                    alert('批量从回收站恢复商品成功');
+                                }else if(option=="delete"){
+                                    alert('批量彻底删除商品成功');
+                                }
+                                window.location.reload();
+                            }
+
+                        }
+                    });
+                }
+
+            }
+        });
+
+
+        //删除回收站的商品
+        $(".del_recycle").click(function () {
+            if (confirm("确认真的删除商品吗?这将无法恢复！")) {
+                var $this = $(this);
+                var goods_id = $(this).attr('data-id');
+                $.ajax({
+                    url: __DEL_RECYCLE_URL__,
+                    type: "POST",
+                    data: {'goods_id': goods_id},
+                    dataType: "html",
+                    success: function (data) {
+                        if(data=="true"){
+                            alert("从回收站删除商品成功！");
+                            $this.parent('td').parent('tr').remove();
+                        }else{
+                            alert("从回收站删除商品失败！");
+                        }
+                    }
+                });
+            }
+        });
+
+        //还原回收站的商品
+        $(".revert_goods").click(function () {
+            if (confirm("确认从回收站恢复商品?")) {
+                var $this = $(this);
+                var goods_id = $(this).attr('data-id');
+                $.ajax({
+                    url: __GOODS_REVERT__,
+                    type: "POST",
+                    data: {'goods_id': goods_id},
+                    dataType: "html",
+                    success: function (data) {
+                        if(data=="true"){
+                            alert("从回收站恢复商品成功！");
+                            $this.parent('td').parent('tr').remove();
+                        }else{
+                            alert("从回收站恢复商品失败！");
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<include file="Public/footer"/>

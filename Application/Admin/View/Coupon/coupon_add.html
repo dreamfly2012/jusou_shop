@@ -1,0 +1,14 @@
+<include file="Public/header" title="添加兑换券" description="" keywords="" />
+
+<include file="Public/leftnav_coupon" />
+
+<div class="right_content">
+    <div class="container">
+        <h2>添加兑换券</h2>
+        <form name="form" id="form" enctype="multipart/form-data" action="{:U('Coupon/addCoupon')}" method="post" class="form" role="form">
+            <include file="coupon_form" />
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />

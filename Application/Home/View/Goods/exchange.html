@@ -1,0 +1,68 @@
+<include file="Public/header" title="巨搜商店" description="这是一个B2C,C2C的平台,在这里你不仅是买家,而且还是卖家,你可以经营属于自己的店铺." keywords="B2C,C2C,O2O,在线交易,线下交易"/>
+
+<div class="header wthrough" style="background: none;">
+<include file="Public/nav_header" />
+</div>
+
+<link rel="stylesheet" type="text/css" href="/Public/Home/css/exchange.css">
+<!--兑换产品-->
+<div class="listbox">
+    <div class="pro-list">
+        <div class="pro-title">
+            <p class="order">热销商品</p>
+        </div>
+        <div class="pro-body">
+            <ul>
+                <foreach name="hot_goods_list" item="hot_goods">
+                <li>
+                    <div class="pro-img">
+                        <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}"><img src="/Uploads/{$hot_goods.img}" alt="{$hot_goods.goods_name}" height="180" width="180"></a>
+                    </div>
+                    <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}" class="font20">
+                    <span class="exchange">消耗积分：:{$hot_goods.integral}</span>
+                    </a>
+                    <p class="blacktext">
+                    <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}" class="font20"></a>
+                    <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}">{$hot_goods.goods_name}</a>
+                    </p>
+                </li>
+                </foreach>
+            </ul>
+        </div>
+    </div>
+    <div class="pro-list">
+        <div class="pro-title">
+            <p class="order">排序：</p>
+            <a class="active" href="{:U('Goods/exchangeGoods',array('order'=>'add_time'))}">按上架时间排序</a>
+            <a class=" fl" href="{:U('Goods/exchangeGoods',array('order'=>'integral'))}">按积分排序</a>
+        </div>
+        <div class="pro-body">
+            <ul>
+                <foreach name="hot_goods_list" item="hot_goods">
+                <li>
+                    <div class="pro-img">
+                        <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}"><img src="/Uploads/{$hot_goods.img}" alt="{$hot_goods.goods_name}" height="180" width="180"></a>
+                    </div>
+                    <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}" class="font20">
+                    <span class="exchange">消耗积分：:{$hot_goods.integral}</span>
+                    </a>
+                    <p class="blacktext">
+                    <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}" class="font20"></a>
+                    <a href="{:U('Goods/goodsDetail',array('goods_id'=>$hot_goods['goods_id']))}">{$hot_goods.goods_name}</a>
+                    </p>
+                </li>
+                </foreach>
+            </ul>
+            <div class="b_page">
+                <div class="b_page011">
+                    <ul>
+                        <form name="selectPageForm" action="/exchange.php" method="get" id="selectPageForm">
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--兑换产品 完-->
+<include file="Public/footer" />

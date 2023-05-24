@@ -1,0 +1,30 @@
+<div id="loginform" class="modal hide fade">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>帐号登录</h3>
+    </div>
+    <form action="{:U('Login/loginHandle')}" method="post" class="form-horizontal">
+        <div class="modal-body">
+            <div class="control-group">
+                <label class="control-label" for="inputEmail">用户名</label>
+                <div class="controls">
+                    <input type="text" id="inputEmail" placeholder="用户名">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputPassword">密码</label>
+                <div class="controls">
+                    <input type="password" id="inputPassword" placeholder="密码">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox"> 保存密码
+                    </label>
+                    <button type="submit" class="btn btn-primary">登陆</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

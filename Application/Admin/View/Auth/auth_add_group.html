@@ -1,0 +1,40 @@
+<include file="Public/header" title="添加权限组" description="" keywords="" />
+
+<include file="Public/leftnav_auth" />
+
+<div class="right_content">
+    <div class="container">
+        <h1>添加权限组</h1>
+        <form role="form" class="form" method="post" action="{:U('Auth/authAddGroupHandle')}">
+            <div class="form-group">
+                <label for="title">权限组名称</label>
+                <input type="text" name="title" class="form-control" id="title" placeholder="权限组名称">
+            </div>
+            <div class="form-group">
+                <foreach name="auth_rule" item="auth_rule">
+                 <input type="checkbox" name="auth_rule_id[]" value="{$auth_rule.id}"> {$auth_rule.title}
+                </foreach>
+            </div>
+            <div class="form-group">
+                <a id="checkall" class="btn btn-default" href="javascript:;">全选</a>
+                <a id="checknone" class="btn btn-default" href="javascript:;">取消全选</a>
+            </div>
+
+            <button type="submit" class="btn btn-default">提交</button>
+        </form>
+    </div>
+
+</div>
+
+<include file="Public/footer" />
+
+<script>
+    $(document).ready(function(){
+        $("#checkall").click(function(){
+            $("input[name='auth_rule_id[]']").prop('checked',true);
+        });
+        $("#checknone").click(function(){
+            $("input[name='auth_rule_id[]']").prop('checked',false);
+        });
+    });
+</script>

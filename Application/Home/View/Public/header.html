@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>巨搜商店</title>
+        <!--文件引入顺序非常重要-->
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+        <link href="__PUBLIC__/Home/css/common.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-responsive.css" rel="stylesheet">
+        <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <include file="Public/commonjs"/>
+    </head>
+    <body>
+        <div class="header wthrough">
+            <div class="header_top w1200 m0auto">
+                <div class="left fleft">
+                    <ul>
+                        <li class="pl20"><span class="fleft collection mr10"></span><a href="javascript:void(0);">收藏本站</a></li>
+                        <li class="ml10">您好，欢迎光临诚佰商城！</li>
+                        <php>if(is_null(session('user_id'))):</php>
+                        <li class="login_info">
+                            <span class="login mr10">
+                                <a href="{:U('Login/index')}">登录</a>
+                            </span>
+                            <span class="register">
+                            <a href="{:U('Register/index')}">注册</a>
+                            </span>
+                        </li>
+                        <php>else:</php>
+                        <li class="login_info">
+                            <a href="{:U('Login/loginout')}">退出</a>
+                        </li>
+                        <php>endif;;</php>
+                    </ul>
+                </div>
+                <div class="right fright">
+                    <ul>
+                        <li><a href="{:U('User/orderlistSetting')}">我的订单</a></li>
+                        <li class="hou-list"><a href="{:U('User/index')}">我的诚佰</a></li>
+                        <li class="qian-list"><a href="#">手机诚佰</a></li>
+                        <li class="hou-list"><a href="#">网站导航</a></li>
+                        <li class="hou-list"><a href="#">客户服务</a></li>
+                        <li class="qian-list"><a href="{:U('Cart/showCart')}">购物车</a></li>
+                        <li class="hou-list"><a href="">关注诚佰</a></li>
+                        <li class="no-separate">客服热线：<font color="red">400-0431-918</font></li>
+                    </ul>
+                </div>
+            </div>
+        </div>

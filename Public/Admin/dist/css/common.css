@@ -1,0 +1,206 @@
+.pb20{
+    padding-bottom: 20px;
+}
+.mb20{
+    margin-bottom: 20px;
+}
+.pt20{
+    padding-top: 20px;
+}
+.none{
+    display:none;
+}
+
+.blue {
+    border: 1px solid #0f70ad;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    background: #208ed3;
+    background: -moz-linear-gradient(top, #208ed3 0%, #0272bd 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#208ed3), color-stop(100%,#0272bd));
+    background: -webkit-linear-gradient(top, #208ed3 0%,#0272bd 100%);
+    background: -o-linear-gradient(top, #208ed3 0%,#0272bd 100%);
+    background: -ms-linear-gradient(top, #208ed3 0%,#0272bd 100%);
+    background: linear-gradient(to bottom, #208ed3 0%,#0272bd 100%);
+}
+
+
+.black{
+    background-color: #000000;
+    color:#000000;
+}
+body{
+    padding-top: 50px;
+}
+
+
+/*登陆页面css*/
+
+.left_content{
+    float:left;
+    width:10%;
+    background-color: #000;
+}
+
+ul.black li{
+    background-color: #000000;
+}
+
+ul.black li a{
+    text-decoration: none;
+    color:#ffffff;
+}
+
+
+
+.right_content{
+    float: right;
+    width:90%;
+    background-color: #ffffff;
+}
+
+.login {
+    background-color: #000000;
+    margin-top: -50px;
+    padding-bottom: 500px;
+}
+.login label {
+    color:#f5f5f5;
+}
+
+label.error{
+    color:#B21F37;
+}
+
+.login section {
+    width: 300px;
+    margin: 200px auto 0 auto;
+    text-align: center;
+}
+
+.login section p a {
+    color: #ccc;
+}
+
+.login section p {
+    margin-top: 15px;
+}
+
+.login section h1 {
+    color: #fff;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 36px;
+    margin-bottom: 15px;
+    letter-spacing: -1px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.login section h1 span {
+    font-weight: 600;
+}
+
+.login input{
+    padding: 10px;
+    font-size: 12px;
+    font-family: Arial;
+    color: #606060;
+    border: 1px solid #e3e3e3;
+    background: #fff;
+    width: 100%;
+    margin: 0 0 15px 0;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.login input {
+    border: 1px solid #323537;
+}
+
+.login button {
+    border: 1px solid #323537;
+    padding: 10px 15px;
+    width: 100%;
+    margin: 0;
+    font-weight: bold;
+}
+
+.login button:hover {
+    color: #3B3E40;
+    text-shadow: none;
+    background: #ededee !important;
+    background: -moz-linear-gradient(top, #ededee 0%, #dddddd 100%) !important;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ededee), color-stop(100%,#dddddd)) !important;
+    background: -webkit-linear-gradient(top, #ededee 0%,#dddddd 100%) !important;
+    background: -o-linear-gradient(top, #ededee 0%,#dddddd 100%) !important;
+    background: -ms-linear-gradient(top, #ededee 0%,#dddddd 100%) !important;
+    background: linear-gradient(to bottom, #ededee 0%,#dddddd 100%) !important;
+}
+
+.login button.loading {
+    background: #9bc747;
+    border: 1px solid #323537;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    height: 35px;
+    -webkit-transition: width .4s ease-in-out;
+    -moz-transition: width .4s ease-in-out;
+    -ms-transition: width .4s ease-in-out;
+    -o-transition: width .4s ease-in-out;
+    transition: width .4s ease-in-out;
+    -webkit-background-size: 30px 30px;
+    -moz-background-size: 30px 30px;
+    background-size: 30px 30px;
+    background-image: -webkit-gradient(linear, left top, right bottom, color-stop(.25, rgba(255, 255, 255, .15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .15)), color-stop(.75, rgba(255, 255, 255, .15)), color-stop(.75, transparent), to(transparent));
+    background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -ms-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%, transparent 75%, transparent);
+    -webkit-animation: animate-stripes 3s linear infinite;
+    -moz-animation: animate-stripes 3s linear infinite;
+}
+
+/*商品分页样式*/
+
+.page_wrapper{
+    float: right;
+    padding-right: 20px;
+}
+
+.pagination a{
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+.pagination span{
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.428571429;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
+/*商品添加修改样式*/
+#myTabContent{
+    padding: 30px;
+}
+
+
+span.error{
+    color: rgb(223, 10, 10);
+    padding-left: 10px;
+}
+

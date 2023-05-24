@@ -1,0 +1,49 @@
+<include file="Public/header" title="{$store_config.store_title}" description="{$store_config.store_desc}"/>
+
+<div class="header wthrough" style="background: none;">
+<include file="Public/nav_header" />
+<include file="Public/index_scroll" />
+</div>
+
+<link rel="stylesheet" type="text/css" href="/Public/Home/css/index.css" />
+<script type="text/javascript" src="/Public/Home/js/index.js"></script>
+
+<div class="body w1200 m0auto">
+     <div class="row-fluid mt10">
+        <div class="span6 mt5">
+            <img src="/Uploads/test/banner-design-onsale.jpg" width="100%" />
+        </div>
+        <div class="span6 mt5">
+            <img src="/Uploads/test/banner-freeshipping.jpg" width="100%" />
+        </div>
+    </div>
+
+    
+    <foreach name="goods_list" item="goods" key="k">
+        <if condition="($k%4) eq 0"><div class="row-fluid pt10"></if>
+        <div class="span3 pt15">
+            <div class="text-center">
+                <a href="{:U('Goods/goodsDetail',array('goods_id'=>$goods['goods_id']))}">
+                    <img src="/Uploads/{$goods.goods_img}" class="img-responsive"/>
+                </a>
+                <div class="goods-footer">
+                <p class="text-center">
+                <a href="javascript:;" class="add_to_cart" data-goods-id="{$goods.goods_id}">
+                    <span class="icon-shopping-cart"></span>
+                    添加到购物车
+                </a>
+                <a href="javascript:;" class="add_to_favourite" data-goods-id="{$goods.goods_id}"> 
+                    <span class="icon-heart"></span>
+                    添加到收藏
+                </a>
+                </p>
+                <p class="text-center"><a href="{:U('Goods/goodsDetail',array('goods_id'=>$goods['goods_id']))}">{$goods.goods_name}</a></p>
+                <p class="text-center"><span class="product-price">{$goods.goods_price}</span></p>
+                </div>
+            </div>
+        </div>
+        <if condition="$k%4 eq 3"></div></if>
+    </foreach>
+</div>
+
+<include file="Public/footer" />

@@ -1,0 +1,55 @@
+<include file="Public/header" keywords="管理首页" title="管理首页" description=""/>
+
+<include file="Public/leftnav_goods" />
+
+<div class="right_content">
+    <table class="table table-responsive table-bordered table_show">
+        <caption>系统基本信息</caption>
+        <thead>
+            <tr>
+                <th>信息</th>
+                <th>版本</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    php 版本：
+                </td>
+                <td>
+                    <php>echo PHP_VERSION;</php>
+                </td>
+            </tr>
+            <tr>
+               <td>
+                    mysql 版本：
+               </td>
+                <td>
+                    <php>echo mysql_get_server_info();</php>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Thinkphp 版本：
+                </td>
+                <td>
+                    <php>echo THINK_VERSION;</php>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Apache 版本：
+                </td>
+                <td>
+                    <php>echo apache_get_version();</php>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<include file="Public/footer" />
+
+
+
+

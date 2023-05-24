@@ -1,0 +1,53 @@
+<include file="Public/header" title="{$store_config.store_title}" description="{$store_config.store_desc}"/>
+<style>
+	body  {
+		background: #f2f2f2;
+	}
+	#regist{
+		background: #FFF;
+	}
+</style>
+<div class="container">
+	<div class="page-header">
+	<h2 class="text-center">欢迎注册</h2>
+	</div>
+</div>
+<div class="container mb30" id="regist">
+    <div class="mc">
+        <form action="{:U('Register/registerHandle')}" method="post" class="form-horizontal">
+            <div class="control-group pt40">
+                <label class="control-label" for="user_name">用户名</label>
+                <div class="controls">
+                    <input type="text" id="user_name" name="user_name" placeholder="用户名">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="email">邮箱</label>
+                <div class="controls">
+                    <input type="text" id="email" name="email" placeholder="邮箱">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="password">密码</label>
+                <div class="controls">
+                    <input type="password" id="password" name="password" placeholder="密码">
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="rpassword">确认密码</label>
+                <div class="controls">
+                    <input type="password" id="rpassword" name="rpassword" placeholder="确认密码">
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox" checked="checked"> 同意相关协议
+                    </label>
+                    <button type="submit" class="btn">注册</button>
+                </div>
+            </div>
+    	</form>
+	</div>
+</div>
+<include file="Public/footer" />

@@ -1,0 +1,127 @@
+<include file="Public/header" title="巨搜商店" description="这是一个B2C,C2C的平台,在这里你不仅是买家,而且还是卖家,你可以经营属于自己的店铺." keywords="B2C,C2C,O2O,在线交易,线下交易"/>
+<div class="container">
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>巨搜商城</h2>
+            <ul class="breadcrumb">
+                <li><a href="#">主页</a></li>
+                <li>{$search_keywords}</li>
+            </ul>
+        </div>
+    </div>
+    
+    <foreach name="goods_list" item="goods" key="k">
+    <if condition="$k%4 eq 0"><div class="row-fluid"></if>
+        <div class="span3 pt15">
+            <div class="text-cener">
+                <a href="{:U('Goods/goodsDetail',array('goods_id'=>$goods['goods_id']))}">
+                <img src="/Uploads/{$goods.goods_img}" class="img-responsive"/>
+                </a>
+                <div class="goods-footer">
+                    <p class="text-center">
+                    <a href="javascript:;" class="add_to_cart" data-goods-id="{$goods.goods_id}">
+                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                    添加到购物车
+                    </a>
+                    <a href="javascript:;" class="add_to_favourite">
+                    <span class="glyphicon glyphicon-heart-empty"></span>
+                    添加到收藏
+                    </a>
+                    </p>
+                    <p class="text-center"><a href="{:U('Goods/goodsDetail',array('goods_id'=>$goods['goods_id']))}">{$goods.goods_name}</a></p>
+                    <p class="text-center"><span class="product-price">{$goods.goods_price}</span></p>
+                </div>
+            </div>
+        </div>
+    <if condition="$k%4 eq 3"></div></if>    
+    </foreach>
+
+    </div>
+</div>
+<!-- 相关产品 -->
+<div class="container mt5">
+    <!-- Headline -->
+    <div class="col-md-12">
+        <h3 class="headline">相关产品</h3>
+        <span class="line margin-bottom-0"></span>
+    </div>
+    <!-- Products -->
+    <div class="products">
+        <!-- Product #1 -->
+        <div class="col-md-3 col-xs-12">
+            <div class="media">
+                <div class="media-top">
+                    <a href="#">
+                    <img class="media-object  img-responsive" src="__PUBLIC__/Home/images/shop_item_01.jpg" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <span class="product-category">皮衣</span>
+                    <h5>棕色款式</h5>
+                    <span class="product-price">￥79.00</span>
+                </div>
+                <div class="media-bottom">
+                    <a href="#" class="product-button"><i class="fa fa-shopping-cart"></i> 添加到购物车</a>
+                </div>
+            </div>
+        </div>
+        <!-- Product #2 -->
+        <div class="col-md-3 col-xs-12">
+            <div class="media">
+                <div class="media-top">
+                    <a href="#">
+                    <img class="media-object  img-responsive" src="__PUBLIC__/Home/images/shop_item_04.jpg"" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <span class="product-category">皮衣</span>
+                    <h5>棕色款式</h5>
+                    <span class="product-price">￥79.00</span>
+                </div>
+                <div class="media-bottom">
+                    <a href="#" class="product-button"><i class="fa fa-shopping-cart"></i> 添加到购物车</a>
+                </div>
+            </div>
+        </div>
+        <!-- Product #3 -->
+        <div class="col-md-3 col-xs-12">
+            <div class="media">
+                <div class="media-heading">
+                    <a href="#">
+                    <img class="media-object  img-responsive" src="__PUBLIC__/Home/images/shop_item_07.jpg"" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <span class="product-category">皮衣</span>
+                    <h5>棕色款式</h5>
+                    <span class="product-price">￥79.00</span>
+                </div>
+                <div class="media-bottom">
+                    <a href="#" class="product-button"><i class="fa fa-shopping-cart"></i> 添加到购物车</a>
+                </div>
+            </div>
+        </div>
+        <!-- Product #4 -->
+        <div class="col-md-3 col-xs-12">
+            <div class="media">
+                <div class="media-top">
+                    <a href="#" class="hover">
+                    <img class="media-object  img-responsive" src="__PUBLIC__/Home/images/shop_item_09.jpg"" alt="...">
+                    </a>
+                    <a href="#" class="hidden">
+                    <img class="media-object  img-responsive" src="__PUBLIC__/Home/images/shop_item_09_hover.jpg"" alt="...">
+                    </a>
+                </div>
+                <div class="media-body">
+                    <span class="product-category">皮衣</span>
+                    <h5>棕色款式</h5>
+                    <span class="product-price">￥79.00</span>
+                </div>
+                <div class="media-bottom">
+                    <a href="#" class="product-button"><i class="fa fa-shopping-cart"></i> 添加到购物车</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />

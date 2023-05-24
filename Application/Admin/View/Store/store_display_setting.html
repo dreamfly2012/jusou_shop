@@ -1,0 +1,54 @@
+<include file="Public/header" title="商店显示信息" description="" keywords="" />
+
+<include file="Public/leftnav_store" />
+
+<div class="right_content">
+    <div class="container">
+        <h2>商店显示信息</h2>
+        <form action="{:U('Store/storeDisplaySettingHandle')}" method="post" class="form" role="form">
+            <div class="form-group">
+                <label for="store_logo">商店logo</label>
+                <if condition="$store.store_logo eq ''">
+                    <input type="file" name="store_logo" id="store_logo"  class="form-control">
+                <else/>
+                    <img src="/Uploads/{$store.store_logo}" width="50" height="50"/>
+                    <input type="file" name="store_logo" id="store_logo"  class="form-control">
+                    <p class="help-block">重新上传将删除原logo</p>
+                </if>
+            </div>
+
+            <div class="form-group">
+                <label for="store_banner">商店banner</label>
+                <if condition="$store.store_banner eq ''">
+                    <input type="file" name="store_banner" id="store_banner"  class="form-control">
+                <else/>
+                    <img src="/Uploads/{$store.store_banner}" width="50" height="50"/>
+                    <input type="file" name="store_banner" id="store_banner"  class="form-control">
+                    <p class="help-block">重新上传将删除原banner</p>
+                </if>
+            </div>
+
+            <div class="form-group">
+                <label for="category_sort_method">商品分类页默认排序方式</label>
+                <select name="category_ort_method" id="category_sort_method" class="form-control">
+                    <option value="on_shelves" selected="selected">上架时间</option>
+                    <option value="price">商品价格</option>
+                    <option value="update_time">商品更新时间</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title_length">
+                    商品title长度设置
+                </label>
+                <input type="text" name="title_length" id="title_length" value="{$store.title_length}" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-success form-control">确定</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />

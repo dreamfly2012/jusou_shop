@@ -1,0 +1,68 @@
+<include file="Public/header" title="[{$title}]" description="" keywords=""/>
+
+<include file="Public/leftnav_address"/>
+
+<div class="right_content table-responsive">
+    <table class="table table-striped table-bordered table_show">
+        <caption>{$title}</caption>
+        <thead>
+        <tr>
+            <th>
+                <a href="{:U('address/addressList',array('type'=>$type,'order_by'=>'address_id','order_sort'=>$order_sort))}">编号</a>
+            </th>
+            <th>
+                <a href="{:U('address/addressList',array('type'=>$type,'order_by'=>'address_name','order_sort'=>$order_sort))}">地址</a>
+            </th>
+            <th>
+                <a href="{:U('address/addressList',array('type'=>$type,'order_by'=>'consignee','order_sort'=>$order_sort))}">联系人</a>
+            </th>
+            <th>
+                <a href="{:U('address/addressList',array('type'=>$type,'order_by'=>'telephone','order_sort'=>$order_sort))}">电话</a></th>
+            <th><a href="{:U('address/addressList',array('type'=>$type,'order_by'=>'postcode','order_sort'=>$order_sort))}">邮政骗码</a></th>
+            <th><a href="javascript:;">操作</a></th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <foreach name="list" item="address">
+            <tr>
+                <td>
+                    <span>{$address.address_id}</span>
+                </td>
+                <td class="first-cell">
+                    <input type="text" readonly="readonly" name="address_name" value="{$address.address_name}"/>
+                </td>
+                <td>
+                    <input type="text" readonly="readonly" name="consignee" value="{$address.consignee}"/>
+                </td>
+                <td align="right">
+                    <input type="text" readonly="readonly" name="telephone" value="{$address.telephone}"/>
+                </td>
+                <td>
+                    <input type="text" readonly="readonly" name="postcode" value="{$address.postcode}" />
+                </td>
+                <td align="center">
+                    <a href="{:U('Address/addressEdit',array('address_id'=>$address['address_id'],'type'=>$type))}" title="编辑">编辑</a>
+                    <a href="javascript:;" class="delete_address" data-id="{$address.address_id}" title="彻底删除">删除</a>
+                </td>
+            </tr>
+        </foreach>
+        </tbody>
+    </table>
+
+    <div class="page_wrapper">
+        <ul class="pagination">{$page}</ul>
+    </div>
+</div>
+<style>
+    .table_show {
+        padding-right: 30px;
+        border: 1px gery solid;
+        width: 90%;
+        font-color: #fff;
+    }
+</style>
+
+
+<include file="Public/footer"/>

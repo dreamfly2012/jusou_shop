@@ -1,0 +1,35 @@
+<include file="Public/header" title="权限管理" description="" keywords="" />
+
+<include file="Public/leftnav_auth" />
+
+<div class="right_content">
+    <div class="container">
+        <table class="table table-responsive table-bordered">
+            <tr>
+                <th>角色</th>
+                <th>操作</th>
+            </tr>
+            <foreach name="list" item="auth_role">
+                <tr>
+                    <td>{$auth_role.name}</td>
+                    <td><a href="{:U('Auth/authRoleDelete',array('uid'=>$auth_role['uid'],'group_id'=>$auth_role['group_id']))}" class="confirm">[删除]</a></td>
+                </tr>
+            </foreach>
+        </table>
+    </div>
+
+</div>
+
+<include file="Public/footer" />
+
+<script>
+    $(document).ready(function(){
+        $(".confirm").click(function(){
+            if(confirm("你真的要从权限列表中删除该用户吗？")){
+                return true;
+            }else{
+                return false;
+            }
+        });
+    });
+</script>

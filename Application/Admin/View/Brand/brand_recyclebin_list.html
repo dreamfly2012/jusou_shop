@@ -1,0 +1,187 @@
+<include file="Public/header" title="品牌回收站展示页" description="" keywords="" />
+
+<include file="Public/leftnav_brand" />
+
+<div class="right_content">
+    <div class="table-responsive container">
+        <table class="table table-striped table-bordered">
+            <caption>品牌回收站</caption>
+            <thead>
+            <tr>
+                <th>
+                    <input class="check_all" type="checkbox">
+                    <a href="{:U('Brand/brandRecycleBinList',array('order_by'=>'brand_id','order_sort'=>$order_sort))}">编号</a>
+                </th>
+                <th>
+                    <a href="{:U('Brand/brandRecycleBinList',array('order_by'=>'brand_name','order_sort'=>$order_sort))}" title="点击对列表排序">品牌名称</a></th>
+                <th><a href="{:U('Brand/brandRecycleBinList',array('order_by'=>'brand_logo','order_sort'=>$order_sort))}">品牌logo</a></th>
+                <th><a href="{:U('Brand/brandRecycleBinList',array('order_by'=>'brand_desc','order_sort'=>$order_sort))}">品牌描述</a></th>
+                <th><a href="{:U('Brand/brandRecycleBinList',array('order_by'=>'site_url','order_sort'=>$order_sort))}">品牌网址</a></th>
+                <th><a href="{:U('Brand/brandRecycleBinList',array('order_by'=>'sort_order','order_sort'=>$order_sort))}" >排序</a></th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+
+            <tbody>
+            <foreach name="list" item="brand">
+                <tr>
+                    <td>
+                        <input type="checkbox" name="checkboxes[]" value="{$brand.brand_id}" class="single_check"/>
+                        <span>{$brand.brand_id}</span>
+                    </td>
+                    <td>
+                        <span>{$brand.brand_name}</span>
+                    </td>
+                    <td>
+                        <img src="/Uploads/{$brand.brand_logo}" width="50" height="50" alt="logo"/>
+                    </td>
+                    <td>
+                        <textarea class="form-control">{$brand.brand_desc}</textarea>
+                    </td>
+                    <td>
+                        <span>{$brand.site_url}</span>
+                    </td>
+                    <td>
+                        <span>{$brand.sort_order}</span>
+                    </td>
+
+                    <td>
+                        <a href="javascript:;" class="revert_brand" data-id="{$brand.brand_id}" title="还原">还原</a>
+                        <a href="javascript:;" class="del_brand" data-id="{$brand.brand_id}" title="彻底删除">彻底删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <div class="page_wrapper"><ul class="pagination">{$page}</ul></div>
+    </div>
+
+    <div class="container">
+        <legend>批量操作</legend>
+        <div class="form-group">
+            <select class="form-control" id="batchsel">
+                <option value="">请选择操作</option>
+                <option value="restore">还原</option>
+                <option value="delete">彻底删除</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" id="batch" value="确认" class="btn btn-primary form-control">
+        </div>
+    </div>
+
+</div>
+<script>
+    var __BRAND_REVERT__ = "{:U('Brand/brandRevert')}";
+    var __DEL_RECYCLE_URL__ = "{:U('Brand/brandDelRecycleBin')}";
+    var __BATCH_RECYCLE_URL__ = "{:U('Brand/recycleBatch')}";
+
+    function message(option)
+    {
+        switch(option)
+        {
+            case 'restore':
+                return "确认要批量从回收站还原品牌吗？";
+                break;
+            case 'delete':
+                return "确认要真的批量删除品牌？将不能恢复了！";
+                break;
+            default:
+                return "";
+        }
+    }
+
+
+    $(document).ready(function(){
+        //品牌回收站批量编辑
+        $("#batch").click(function(){
+            var option = $("#batchsel").val();
+            var brand_ids = '';
+            $(".single_check").each(function(){
+                if($(this).prop('checked')==true){
+                    brand_ids += $(this).val()+":";
+                }
+            });
+            if(option == ''){
+                alert("你没有选择任何操作!");
+            }else if(brand_ids == ''){
+                alert("你没有选择任何品牌!");
+            }else{
+                var confirm_message = message(option);
+                if(confirm(confirm_message)){
+                    $.ajax({
+                        url: __BATCH_RECYCLE_URL__,
+                        type: "POST",
+                        data: { 'brand_ids': brand_ids, 'operation': option},
+                        dataType: "html",
+                        success: function(data){
+                            if(data=="true"){
+                                if(option=="restore"){
+                                    alert("批量还原品牌成功！");
+                                }else if(option=="delete"){
+                                    alert("批量删除品牌成功！");
+                                }
+                                window.location.reload();
+                            }else{
+                                if(option=="restore"){
+                                    alert("批量还原品牌失败！");
+                                }else if(option=="delete"){
+                                    alert("批量删除品牌失败！");
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+        //删除回收站的品牌
+        $(".del_brand").click(function(){
+            if(confirm("确认删除品牌?将无法恢复!")){
+                var $this = $(this);
+                var brand_id = $(this).attr('data-id');
+                $.ajax({
+                    url: __DEL_RECYCLE_URL__,
+                    type: "POST",
+                    data: {'brand_id':brand_id},
+                    dataType: "html",
+                    success: function(data){
+                        if(data=="true"){
+                            alert("删除品牌成功！");
+                            $this.parent('td').parent('tr').remove();
+                        }else{
+                           alert("删除品牌失败");
+                        }
+                    }
+                });
+            }
+        });
+
+        //还原回收站的品牌
+        $(".revert_brand").click(function(){
+            if(confirm("确认从回收站恢复品牌?")){
+                var $this = $(this);
+                var brand_id = $(this).attr('data-id');
+                $.ajax({
+                    url: __BRAND_REVERT__,
+                    type: "POST",
+                    data: {'brand_id':brand_id},
+                    dataType: "html",
+                    success: function(data){
+                        if(data=="true"){
+                            alert("成功从回收站还原品牌！");
+                            $this.parent('td').parent('tr').remove();
+                        }else{
+                            alert("还原品牌失败！");
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<include file="Public/footer" />

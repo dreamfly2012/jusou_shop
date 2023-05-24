@@ -1,0 +1,82 @@
+<include file="Public/header" title="会员等级" description="" keywords="" />
+
+<include file="Public/leftnav_member" />
+
+<div class="right_content">
+    <div class="table-responsive container">
+        <table class="table table-striped table-bordered">
+            <a href="{:U('Member/rankAdd')}">添加会员等级</a>
+            <thead>
+            <tr>
+                <th>
+                    <span>会员等级</span>
+                </th>
+                <th>
+                    <span>所需积分</span>
+                </th>
+                <th>
+                    <span>享受折扣</span>
+                </th>
+                <th>
+                    <span>操作</span>
+                </th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <foreach name="list" item="rank">
+                <tr>
+                    <td>
+                        <span>{$rank.rank_name}</span>
+                    </td>
+                    <td>
+                        <span>{$rank.level_points}</span>
+                    </td>
+                    <td>
+                        <span>{$rank.discount}</span>
+                    </td>
+                    <td>
+                        <a href="{:U('Member/rankEdit',array('rank_id'=>$rank['rank_id']))}" title="编辑">编辑</a>
+                        <a href="javascript:;" class="del_rank" data-id="{$rank.rank_id}" title="删除">删除</a>
+                    </td>
+                </tr>
+            </foreach>
+            </tbody>
+        </table>
+        <div class="page_wrapper">
+            <ul class="pagination">{$page}</ul>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    var __DEL_RANK_URL__ = "{:U('Member/deleteMemberRank')}";
+   
+    $(document).ready(function(){
+         //等级删除
+        $(".del_rank").click(function(){
+            if(confirm("确认要删除会员等级吗？")){
+                var $this = $(this);
+                var rank_id = $(this).attr('data-id');
+                $.ajax({
+                    url: __DEL_RANK_URL__,
+                    type: "POST",
+                    data: {'rank_id':rank_id},
+                    dataType: "html",
+                    success: function(data){
+                        if(data="true"){
+                            alert("删除会员等级成功！");
+                            $this.parent('td').parent('tr').remove();
+                        }else{
+                            alert('删除会员等级失败！');
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<include file="Public/footer" />

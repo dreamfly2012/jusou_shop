@@ -1,0 +1,58 @@
+<include file="Public/header" title="订单详情页" description="" keywords=""/>
+
+<include file="Public/leftnav_order"/>
+    <div class="right_content container">
+        <div class="row">
+            <div class="col-md-12">
+                <form action="{:U('Order/orderSearchHandle')}" method="post">
+                <table class="table-responsive">
+                    <tr>
+                        <th>商品名称：</th>
+                        <td><input type="text" name="goods_name" /></td>
+                        <th>成交开始区间：</th>
+                        <td><input type="text" name="add_time_start" id="add_time_start"/></td>
+                        <th>成交结束区间：</th>
+                        <td><input type="text" name="add_time_end" id="add_time_end"/></td>
+                    </tr>
+                    <tr>
+                        <th>买家昵称：</th>
+                        <td><input type="text" name="user_name" /></td>
+                        <th>订单状态：</th>
+                        <td><input type="text" name="order_status" /></td>
+                        <th>评价状态:</th>
+                        <td><input type="text" name="comment_status"/></td>
+                    </tr>
+                    <tr>
+                        <th>订单编号:</th>
+                        <td><input type="text" name="order_sn"/></td>
+                        <th>物流服务:</th>
+                        <td><input type="text" name="comment_deliver"/></td>
+                        <th>售后服务:</th>
+                        <td><input type="text" name="comment_after_sale_service"/></td>
+                    </tr>
+                </table>
+
+
+                <table>
+                    <tr>
+                        <th><input type="submit" value="搜索" class="btn btn-default"></th>
+                    </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+    </div>
+<include file="Public/footer"/>
+
+<script type="text/javascript" src="__PUBLIC__/Admin/timepicker/js/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript">
+
+    $("#add_time_start").datetimepicker({
+        timeFormat: "HH:mm:ss",
+        dateFormat: "yy-mm-dd"
+    });
+    $("#add_time_end").datetimepicker({
+        timeFormat: "HH:mm:ss",
+        dateFormat: "yy-mm-dd"
+    });
+</script>

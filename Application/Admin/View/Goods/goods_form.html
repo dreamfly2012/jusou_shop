@@ -1,0 +1,418 @@
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#general" data-toggle="tab"> 普通信息</a>
+    </li>
+    <li>
+        <a href="#detail" data-toggle="tab"> 详细描述</a>
+    </li>
+    <li>
+        <a href="#mix" data-toggle="tab"> 其他信息</a>
+    </li>
+    <li>
+        <a href="#sku" data-toggle="tab"> 商品sku信息</a>
+    </li>
+    <li>
+        <a href="#gallery" data-toggle="tab"> 商品相册</a>
+    </li>
+</ul>
+
+<div id="myTabContent" class="tab-content">
+
+    <div id="general" class="tab-pane fade in active">
+
+        <div class="form-group">
+            <label for="goods_name">商品名称：</label>
+            <input type="text" name="goods_name" id="goods_name" value="{$goods.goods_name}" class="form-control" placeholder="商品名称"/>
+        </div>
+
+        <div class="form-group">
+            <label for="goods_sn">商品货号：</label>
+            <input type="text" name="goods_sn" id="goods_sn" value="{$goods.goods_sn}" class="form-control" placeholder="商品货号"/>
+        </div>
+
+        <div class="form-group">
+            <label for="category">商品分类：</label>
+            <div id="category"></div>
+            <input type="hidden" name="cat_id" id="cat_id" value="{$goods.cat_id}"/>
+        </div>
+
+        <div class="form-group">
+            <label for="brand_id">商品品牌：</label>
+            <select name="brand_id" id="brand_id" class="form-control">
+                <foreach name="brands" item="brand">
+                    <option value="{$brand.brand_id}" <if condition="$brand.brand_id eq $goods['brand_id']">selected='selected'</if>>
+                        {$brand.brand_name}
+                    </option>
+                </foreach>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="shop_price">本店售价：</label>
+            <input type="text" name="shop_price" id="shop_price" value="{$goods.shop_price}" class="form-control"/>
+            <span class="input-group-btn">
+                <input type="button" id="marketPriceSetted" value="按市场价打折计算" class="form-control btn-default btn"/>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="discount">折扣：</label>
+            <input type="text" id="discount" class="form-control">
+            <p class="help-block">0.8表示打8折,此处决定市场本店售价和市场售价的比值</p>
+        </div>
+
+        <div class="form-group">
+            <label for="market_price">市场售价：</label>
+            <input type="text" name="market_price" id="market_price" value="{$goods.market_price}" class="form-control"/>
+            <span class="input-group-btn">
+                <input type="button" id="integral_market_price" value="取整数" class="form-control btn btn-default"/>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label for="is_promote">是否促销：</label>
+            <input type="checkbox" name="is_promote" id="is_promote" value="1" <if condition="$goods['is_promote'] eq 1">checked="checked"</if> class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="promote_price">促销价</label>
+            <input type="text" name="promote_price" id="promote_price" value="{$goods.promote_price}" <if condition="$goods['is_promote'] neq 1">disabled="disabled"</if> class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="promote_start_date">促销开始日期</label>
+            <input type="text" name="promote_start_date" id="promote_start_date" value="{$goods.promote_start_date|now_date}" readonly="readonly" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="promote_end_date">截止日期</label>
+            <input type="text" name="promote_end_date"  id="promote_end_date" value="{$goods.promote_end_date|now_date}" readonly="readonly" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label for="goods_img">上传商品图片：</label>
+            <if condition="$goods.goods_img eq ''">
+                <input type="file" name="goods_img" id="goods_img" class="form-control" />
+                <p class="help-block">图片未上传</p>
+            <else/>
+                <img src="/Uploads/{$goods.goods_thumb}" width="100" height="100"/>
+                <input type="file" name="goods_img" id="goods_img" class="form-control">
+                <p class="help-block">重新上传将删除源文件</p>
+            </if>
+        </div>
+    </div>
+
+
+    <div id="detail" class="tab-pane fade">
+        <div class="form-group">
+            <script id="goods_desc" name="goods_desc" type="text/plain">
+                {$goods.goods_desc}
+            </script>
+        </div>
+    </div>
+
+
+    <div id="mix" class="tab-pane fade">
+        <div class="form-group">
+            <label for="goods_weight">商品重量：</label>
+            <input type="text" name="goods_weight" id="goods_weight" value="{$goods.weight}" class="form-control"/>
+            <p class="help-block">单位：千克</p>
+        </div>
+
+        <div class="form-group">
+            <label for="goods_number"> 商品库存数量：</label>
+            <input type="text" name="goods_number" id="goods_number" value="{$goods.goods_number}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="warn_number">库存警告数量：</label>
+            <input type="text" name="warn_number" id="warn_number" value="{$goods.warn_number}" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label for="is_best">精品:</label>
+            <input type="checkbox" name="is_best" id="is_best" value="1" <if condition="$goods.is_best eq 1">checked="checked"</if> class="form-control" />
+            <p class="help-block">精品勾选</p>
+        </div>
+
+        <div class="form-group">
+            <label for="is_new">新品:</label>
+            <input type="checkbox" name="is_new" id="is_new" value="1" <if condition="$goods.is_new eq 1">checked="checked"</if> class="form-control" />
+            <p class="help-block">新品勾选</p>
+        </div>
+
+        <div class="form-group">
+            <label for="is_hot">热销</label>
+            <input type="checkbox" name="is_hot" id="is_hot" value="1" <if condition="$goods.is_hot eq 1">checked="checked"</if> class="form-control" />
+            <p class="help-block">热销勾选</p>
+        </div>
+
+        <div class="form-group">
+            <label for="is_shipping">是否免运费</label>
+            <input type="checkbox" id="is_shipping" name="is_shipping" value="1" <if condition="$goods.is_shipping eq 1">checked="checked"</if> class="form-control"/>
+            <p class="help-block">免运费勾选</p>
+        </div>
+
+        <div class="form-group">
+            <label for="keywords">商品关键词：</label>
+            <input type="text" name="keywords" id="keywords" value="{$goods.keywords}" class="form-control"/>
+            <p class="help-block">逗号分隔</p>
+        </div>
+    </div>
+
+
+    <div id="sku" class="tab-pane fade">
+        <div class="container">
+            <table class="table-striped table table-bordered">
+                <caption>商品sku修改</caption>
+                <thead>
+                <tr>
+                    <th>sku属性</th>
+                    <th>sku值</th>
+                    <th>价格</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <foreach name="skus" item="sku">
+                    <tr>
+                        <input type="hidden" name="goods_attr_id[]" value="{$sku.goods_attr_id}"/>
+                        <td><input type="text" name="attr_name[]" value="{$sku.attr_name}"/></td>
+                        <td><input type="text" name="attr_value[]" value="{$sku.attr_value}"/></td>
+                        <td><input type="text" name="attr_price[]" value="{$sku.attr_price}"/></td>
+                        <td><input type="button" class="btn btn-default deletesku" data-goods-attr-id="{$sku.goods_attr_id}"
+                                   value="删除"/></td>
+                    </tr>
+                </foreach>
+                <tr>
+                    <td id="add_sku">[+]增加属性</td>
+                    <td></td>
+                    <td id="remove_sku">[-]移除属性</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div id="gallery" class="tab-pane fade">
+        <div class="container">
+            <table class="table-striped table table-bordered">
+                <caption>商品相册修改</caption>
+                <thead>
+                <tr>
+                    <th>图片描述</th>
+                    <th>上传图片</th>
+                </tr>
+                </thead>
+                <tbody>
+                <foreach name="galleries" item="gallery">
+                    <tr>
+                        <input type="hidden" name="img_id" value="{$gallery.img_id}"/>
+                        <td><img src="/Uploads/{$gallery.thumb_url}" width="100" height="100"/></td>
+                        <td><input type="button" class="btn btn-default delete_gallery" data-goods-id="{$goods.goods_id}"
+                                   data-img-id="{$gallery.img_id}" value="删除相册"/></td>
+                    </tr>
+                </foreach>
+                <tr>
+                    <td id="add_gallery">[+]增加相册</td>
+                    <td id="remove_gallery">[-]移除相册</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <input type="hidden" name="goods_id" value="{$goods.goods_id}">
+        <input type="submit" value=" 确定 " class="form-control btn btn-primary">
+    </div>
+
+</div>
+
+
+
+<link rel="stylesheet" href="__PUBLIC__/Admin/jqtree/jqtree.css"/>
+<script type="text/javascript" src="__PUBLIC__/Admin/jqtree/tree.jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/timepicker/js/jquery-ui-timepicker-addon.js"></script>
+
+
+<!-- 配置文件 -->
+<script type="text/javascript" src="__PUBLIC__/Admin/ueditor1_4_3-utf8-php/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="__PUBLIC__/Admin/ueditor1_4_3-utf8-php/ueditor.all.js"></script>
+<script>
+    var __LOAD_GOODS_CATEGORY__ = "{:U('Category/loadCategory')}";
+    var __DELETE_GOODS_GALLERY__ = "{:U('Goods/delGoodsGallery')}";
+    var __DELETE_GOODS_ATTR__ = "{:U('Goods/delGoodsAttr')}";
+
+    
+    var ue = UE.getEditor('goods_desc', {
+        autoHeight: false
+    });
+
+    /*CKEDITOR.replace(  'goods_desc',
+            {
+                filebrowserBrowseUrl :  '__PUBLIC__/Admin/ckfinder/ckfinder.html',
+                filebrowserImageBrowseUrl :  '__PUBLIC__/Admin/ckfinder/ckfinder.html?Type=Images',
+                filebrowserFlashBrowseUrl :  '__PUBLIC__/Admin/ckfinder/ckfinder.html?Type=Flash',
+                filebrowserUploadUrl :  '__PUBLIC__/Admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+                filebrowserImageUploadUrl  :  '__PUBLIC__/Admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images',
+                filebrowserFlashUploadUrl  :  '__PUBLIC__/Admin/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash'
+            });*/
+    $(document).ready(function () {
+        //类型树初始化加载加载
+        $('#category').tree({
+            dataUrl: __LOAD_GOODS_CATEGORY__,
+            selectable: true
+        });
+
+        $("#category").on(
+                'tree.init',
+                function () {
+                    if ($("#cat_id").val() != "") {
+                        var node = $('#category').tree('getNodeById', $("#cat_id").val());
+                        $('#category').tree('selectNode', node);
+                    }
+                }
+        );
+
+        //类型树选择时的处理
+        $('#category').on(
+                'tree.select',
+                function (event) {
+                    if (event.node) {
+                        // node was selected
+                        var node = event.node;
+                        $("#cat_id").val(node.cat_id);
+                    }
+                }
+        );
+
+       
+        $("#is_promote").click(function(){
+            if($("#is_promote").prop('checked')){
+                $("#promote_price").removeAttr('disabled');
+            }else{
+                $("#promote_price").attr('disabled','disabled');
+            }
+        });
+
+        //促销开始结束 datetimepicker
+        $("#promote_start_date").datetimepicker({
+            timeFormat: 'HH:mm:ss',
+            dateFormat: 'yy-mm-dd'
+        });
+        $("#promote_end_date").datetimepicker({
+            timeFormat: 'HH:mm:ss',
+            dateFormat: 'yy-mm-dd'
+        });
+
+
+        //市场价取整数
+        $("#integral_market_price").click(function () {
+            $("#market_price").val(parseInt($("#market_price").val()));
+        });
+
+        //商店售价根据市场价进行打折
+        $("#marketPriceSetted").click(function () {
+            var market_price = $("#market_price").val();
+            var discount = $("#discount").val();
+            if (discount) {
+                $("#shop_price").val(Math.round(market_price * discount * 100) / 100);
+            } else {
+                $("#shop_price").val(market_price);
+            }
+        });
+
+        //商品sku的添加删除修改
+        if ($("#add_sku").length != 0) {
+            $("#add_sku").click(function () {
+                var content = '<tr>' +
+                        '<td><input type="text" name="attr_name[]" value="" /></td>' +
+                        '<td><input type="text" name="attr_value[]" value="" /></td>' +
+                        '<td><input type="text" name="attr_price[]" value="" /></td>' +
+                        '</tr>';
+                $(content).appendTo($(this).parent('tr').parent('tbody'));
+            });
+            $("#remove_sku").click(function () {
+                if ($(this).parent('tr').next('tr').length != 0) {
+                    $(this).parent('tr').next('tr').remove();
+                }
+            });
+        }
+
+        //删除sku
+        if ($(".deletesku").length != 0) {
+            $(".deletesku").click(function () {
+                if (confirm("你真的要删除这个属性吗？")) {
+                    var $this = $(this);
+                    var goods_attr_id = $(this).attr('data-goods-attr-id');
+                    $.ajax({
+                        url: __DELETE_GOODS_ATTR__,
+                        type: "POST",
+                        data: {'goods_attr_id': goods_attr_id},
+                        dataType: "html",
+                        success: function (data) {
+                            if(data==1){
+                                $this.parent('td').parent('tr').remove();
+                            }else{
+                                alert('删除失败！');
+                            }
+                            
+                        }
+                    });
+                }
+            });
+        }
+
+        //商品相册的添加删除修改
+        if ($("#add_gallery").length != 0) {
+            $("#add_gallery").click(function () {
+                var content = '<tr>' +
+                        '<td><input type="text" name="img_desc[]" value="" /></td>' +
+                        '<td><input type="file" name="img_url[]" value="" /></td>' +
+                        '</tr>';
+                $(content).appendTo($(this).parent('tr').parent('tbody'));
+            });
+            $("#remove_gallery").click(function () {
+                if ($(this).parent('tr').next('tr').length != 0) {
+                    $(this).parent('tr').next('tr').remove();
+                }
+            });
+        }
+
+
+        //删除商品相册
+        if ($(".delete_gallery").length != 0) {
+            $(".delete_gallery").click(function () {
+                if (confirm("你真的要删除相册吗？")) {
+                    var $this = $(this);
+                    var img_id = $(this).attr('data-img-id');
+                    $.ajax({
+                        url: __DELETE_GOODS_GALLERY__,
+                        type: "POST",
+                        data: {'img_id': img_id},
+                        dataType: "html",
+                        success: function (data) {
+                            if(data==1){
+                                $this.parent('td').parent('tr').remove();
+                            }else{
+                                alert('删除失败');
+                            }
+                            
+                        }
+                    });
+                }
+            });
+        }
+
+
+    });
+
+
+</script>
+
+
+

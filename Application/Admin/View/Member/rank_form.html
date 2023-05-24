@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="form-group">
+        <label for="rank_name">会员等级</label>
+        <input type="text" name="rank_name" id="rank_name" value="{$rank.rank_name}" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="level_points">所需积分</label>
+        <input type="text" name="level_points" id="level_points" value="{$rank.level_points}" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="discount">享受折扣</label>
+        <input type="text" name="discount" id="discount" value="{$rank.discount}" class="form-control" />
+        <p class="help-block">95表示打九五折</p>
+    </div>
+
+    <div class="form-group">
+        <input type="hidden" name="rank_id" value="{$rank.rank_id}">
+        <input type="submit" value=" 确定 " class="form-control btn btn-success">
+    </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/Admin/jqvalidate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/jqvalidate/messages_zh.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#form").validate({
+            rules: {
+                rank_name: {
+                    required: true
+                },
+                level_points: {
+                    required: true
+                },
+                discount: {
+                    required: true
+                }
+            }
+        });
+    });
+</script>

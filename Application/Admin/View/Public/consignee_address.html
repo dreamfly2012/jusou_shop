@@ -1,0 +1,30 @@
+<div class="form-group">
+    <label>收货地址</label>
+    <select name="province" id="province">
+        <foreach name="province_list" item="province">
+            <option value="{$province.region_id}" <if condition="$consignee.province eq $province.region_id">selected</if>>{$province.region_name}</option>
+        </foreach>
+    </select>
+    <select name="city" id="city">
+        <foreach name="city_list" item="city">
+            <option value="{$city.region_id}" <if condition="$consignee.city eq $city.region_id">selected</if>>{$city.region_name}</option>
+        </foreach>
+    </select>
+    <select name="district" id="district">
+        <foreach name="district_list" item="district">
+            <option value="{$district.region_id}" <if condition="$consignee.district eq $district.region_id">selected</if>>{$district.region_name}</option>
+        </foreach>
+    </select>
+</div>
+<div class="form-group">
+    <label for="consignee">联系人</label>
+    <input type="text" name="consignee" class="form-control" id="consignee" value="{$consignee.consignee}"/>                       <input type="text" name="method" value="" id="method" class="none">
+</div>
+<div class="form-group">
+    <label for="telephone">电话号码</label>
+    <input type="text" name="telephone" class="form-control" id="telephone" value="{$consignee.telephone}" />
+</div>
+<div class="form-group">
+    <label for="postcode">邮编</label>
+    <input name="postcode" class="form-control" id="postcode" value="{$consignee.postcode}"/>
+</div>

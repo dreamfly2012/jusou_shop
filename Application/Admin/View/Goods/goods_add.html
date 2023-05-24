@@ -1,0 +1,14 @@
+<include file="Public/header" title="商品添加" description="" keywords="" />
+
+<include file="Public/leftnav_goods" />
+
+<div class="right_content">
+    <div class="container">
+        <h2>商品添加</h2>
+        <form name="form" id="form" enctype="multipart/form-data" action="{:U('Goods/addGoods')}" method="post" class="form" role="form">
+            <include file="goods_form" />
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />

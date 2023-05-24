@@ -1,0 +1,42 @@
+<include file="Public/header" title="权限管理" description="" keywords="" />
+
+<include file="Public/leftnav_auth" />
+
+<div class="right_content">
+    <div class="container">
+        <form action="{:U('Auth/authGroupRuleEdit')}" method="post" class="form" role="form">
+            <div class="form-group">
+                <label>权限管理</label>
+            </div>
+
+            <foreach name="list" item="auth_group_rule">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="auth_rule_id[]" <if condition="$auth_group_rule.checked eq true">checked="checked"</if> value="{$auth_group_rule.id}"> {$auth_group_rule.title}
+                </label>
+            </div>
+            </foreach>
+            <div class="form-group">
+                <a id="checkall" class="btn btn-default" href="javascript:;">全选</a>
+                <a id="checknone" class="btn btn-default" href="javascript:;">取消全选</a>
+            </div>
+            <input type="hidden" name="auth_group_id" value="{$auth_group_id}" />
+            <button type="submit" class="btn btn-default">Submit</button>
+
+        </form>
+    </div>
+
+</div>
+
+<include file="Public/footer" />
+
+<script>
+    $(document).ready(function(){
+        $("#checkall").click(function(){
+            $("input[name='auth_rule_id[]']").prop('checked',true);
+        });
+        $("#checknone").click(function(){
+            $("input[name='auth_rule_id[]']").prop('checked',false);
+        });
+    });
+</script>

@@ -1,0 +1,121 @@
+<include file="Public/header" title="巨搜商店" description="这是一个B2C,C2C的平台,在这里你不仅是买家,而且还是卖家,你可以经营属于自己的店铺." keywords="B2C,C2C,O2O,在线交易,线下交易"/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>购物车</h2>
+            <ol class="breadcrumb">
+                <li><a href="/">主页</a></li>
+                <li>购物车</li>
+            </ol>
+        </div>
+        <div class="col-md-12">
+            <!-- PC端购物车展示-->
+            <table class="table table-hover table-striped hidden-xs hidden-sm">
+                <tbody>
+                    <foreach name="goods_list" item="goods">
+                    <tr> 
+                        <th>
+                            <input type="checkbox" />全选
+                        </th>
+                        <th>商品</th>
+                        <th>单价(元)</th>
+                        <th>数量</th>
+                        <th>小计(元)</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="/Uploads/test/small_product_list_08.jpg" alt="">
+                        </td>
+                        <td>
+                           {$goods.goods_name}
+                        </td>
+                        <td>
+                            {$goods.goods_price}
+                        </td>
+                        <td>
+                            <span class="glyphicon glyphicon-minus cart-minus"></span>
+                            <input type="text" name="quantity" value="{$goods.goods_number}" data-recid="{$goods.rec_id}" class="cart-input">
+                            <span class="glyphicon glyphicon-plus cart-plus"></span>
+                        </td>
+                        <td>
+                            <span class="sub_sum">{$goods.sub_total_price}</span>
+                        </td>
+                    </tr>
+                    </foreach>
+                </tbody>
+            </table>
+
+            <!-- mobile端购物车展示-->
+            <table class="table table-hover table-striped hidden-lg hidden-md">
+                <tbody>
+                    <foreach name="goods_list" item="goods">
+                    <tr> 
+                        <th>全选<input type="checkbox" class="check-all"/></th>
+                        <td>
+                            <img src="/Uploads/test/small_product_list_08.jpg" alt="">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>商品</th>
+                        <td>
+                            {$goods.goods_name}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>单价(元)</th>
+                        <td>
+                            {$goods.goods_price}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>单价</th>
+                        <td>
+                            <span class="glyphicon glyphicon-minus cart-minus"></span>
+                            <input type="text" name="quantity" value="{$goods.goods_number}" data-recid="{$goods.rec_id}" class="cart-input">
+                            <span class="glyphicon glyphicon-plus cart-plus"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>小计(元)</th>
+                        <td>
+                            {$goods.sub_total_price}
+                        </td>
+                    </tr>
+                    </foreach>
+                </tbody>
+            </table>
+            
+                    
+            <div class="cart-btns">
+                <a href="{:U('Order/checkout')}" class="btn btn-default gray cart-btns">结账</a>
+            </div>
+        </div>
+
+        <!-- 购物车 -->
+        <div class="col-md-6 col-xs-12 fr">
+            <div class="page-header text-center">
+                <h3>购物车</h3>
+            </div>
+            
+            
+            <table class="table table-hover table-striped">
+                <tbody>
+                    <tr>
+                        <th>小计(元)</th>
+                        <td><strong>{$goods.total_price}</strong></td>
+                    </tr>
+                    <tr>
+                        <th>运费</th>
+                        <td>{$goods.shipping_fee}</td>
+                    </tr>
+                    <tr>
+                        <th>总的费用</th>
+                        <td><strong>{$goods.total_amount}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<include file="Public/footer" />

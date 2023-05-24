@@ -1,0 +1,95 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <span>收货信息</span> 
+    </div>
+    <div class="panel-body">
+        <label class="billing">配送区域: <abbr>*</abbr></label>
+        
+        <select id="sel_province">
+            <option value="0">请选择</option>
+            <volist name="provinces" id="province">
+                <option value="{$province.region_id}">{$province.region_name}</option>
+            </volist>
+        </select>
+     
+        <select id="sel_city">
+            <option value="0">请选择</option>
+            <volist name="cities" id="city">
+                <option value="{$city.region_id}">{$city.region_name}</option>
+            </volist>
+        </select>
+       
+        <select id="sel_district">
+            <option value="0">请选择</option>
+            <volist name="districts" id="district">
+                <option value="{$district.region_id}">{$district.region_name}</option>
+            </volist>
+        </select>
+
+        <div>
+            <label>姓名: <abbr>*</abbr></label>
+            <input type="text" placeholder="姓名" value="" />
+        </div>
+        <div>
+            <label>邮编:<abbr>*</abbr></label>
+            <input type="text" placeholder="邮编" value="" />
+        </div>
+        <div class="form-group">
+            <label>Email: <abbr>*</abbr></label>
+            <input type="text" placeholder="Email" value=""/>
+        </div>
+        <div class="form-group">
+            <label>电话号码: <abbr>*</abbr></label>
+            <input type="text" placeholder="电话号码" value="" />
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label for="shipping-address" class="checkbox">
+                    <input id="shipping-address" type="checkbox" name="shipping-address" checked="checked" value="1">详细地址邮件发送的地址
+                </label>
+            </div>
+        </div>
+        <a href="{:U('Order/delivery')}" class="btn btn-success">继续</a>
+        <a href="{:U('Order/delivery')}" class="btn">
+        <div class="checkout-section"><span>2</span> Delivery</div>
+        </a>
+        <a href="{:U('Order/payOrder')}" class="btn">
+        <div class="checkout-section"><span>3</span> 确认支付</div>
+        </a>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var __REGION_AJAX__ = "{:U('Region/getAjaxData')}";
+
+    function ajaxRegion(region_id,region_type,obj){
+        $.ajax({
+            url: __REGION_AJAX__,
+            type: "POST",
+            data: {'region_id': region_id, 'region_type':region_type},
+            dataType: "json",
+            success: function (data) {
+                obj.empty();
+                for(var i=0;i<data.length;i++){
+                    obj.append("<option value='"+data[i].region_id+"'>"+data[i].region_name+"</option>");
+                }
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        $('#sel_province').change(function(){ 
+            var region_id = $(this).children('option:selected').val();
+            var region_type = '2';
+            ajaxRegion(region_id, region_type,$('#sel_city'));
+            
+        });
+
+        $('#sel_city').change(function(){
+            var region_id = $(this).children('option:selected').val();
+            var region_type = '3';
+            ajaxRegion(region_id, region_type,$('#sel_district'));
+        });
+    });
+</script>

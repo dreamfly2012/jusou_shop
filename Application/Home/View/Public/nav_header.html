@@ -1,0 +1,69 @@
+<div class="header_middle w1200 m0auto of ">
+    <div id="logo" class="fleft">
+        <a href="#"><img src="__PUBLIC__/Home/images/logo.png" alt="诚佰" height="68" width="210"></a>
+    </div>
+    <div class="fleft logo_ad ml10">
+    </div>
+    <div class="search_warp fright ml35" style="margin-right:80px;">
+        <div class="search">
+            <form action="{:U('Search/searchGoods')}" method="post" name="searchForm" id="searchForm">
+                <div class="input fleft"><input name="keywords" type="text"></div>
+                <div class="submit fleft"><input value="搜 索" type="submit"></div>
+            </form>
+        </div>
+        <div class="clr"></div>
+        <div class="hot_keywords">
+            热门搜索：
+            <a href="{:U('Search/searchGoods',array('goods_name'=>''))}" target="_blank">酒鬼酒</a>&nbsp;
+            <a href="{:U('Search/searchGoods',array('goods_name'=>''))}" target="_blank">茅台</a>&nbsp;
+            <a href="{:U('Search/searchGoods',array('goods_name'=>''))}" target="_blank">汾酒</a>&nbsp;
+            <a href="{:U('Search/searchGoods',array('goods_name'=>''))}" target="_blank">洋河</a>&nbsp;
+            <a href="{:U('Search/searchGoods',array('goods_name'=>''))}" target="_blank">郎酒</a>&nbsp;
+        </div>
+    </div>
+</div>
+<div class="nav_awrp wthrough">
+    <div class="nav w1200 m0auto">
+        <div class="all_category fleft">
+            <div class="all_category_switch">
+                <span class="home fleft ml10 mr5"></span>全部商品分类
+                <span class="down fright mr20"></span>
+            </div>
+            <div class="cateMenu">
+                <ul>
+                    <foreach name="nav_categories" item="nav_category" key="k">
+                    <li style="border-top: 0px;" <if condition="$k%2">class="even"</if>>
+                        <div class="cate-tag">
+                            <strong><a href="{:U('Category/categoryList',array('cat_id'=>$nav_category['cat_id']))}">{$nav_category.cat_name}</a></strong>
+                        </div>
+                        <div class="list-item hide">
+                            <ul class="itemleft">
+                                <dl>
+                                    <dt>产品</dt>
+                                    <dd>
+                                    <foreach name="nav_category['goods_list']" item="nav_goods">
+                                    <a title="{$nav_goods.goods_name}" target="_blank" href="{:U('Goods/goodsDetail',array('goods_id'=>$nav_goods['goods_id']))}">{$nav_goods.goods_name}</a>
+                                    </foreach>
+                                    </dd>
+                                </dl>
+                            </ul>
+                        </div>
+                    </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+        <div class="nav_list fleft">
+            <ul>
+                <li class="active"><a href="">首页</a></li>
+                <li><a href="#">天天特惠</a></li>
+                <li><a href="#">限时秒杀</a></li>
+                <li><a href="#">会员专区</a></li>
+                <li><a href="{:U('Goods/exchangeGoods')}">兑换中心</a><div class="nav_hot"></div></li>
+                <li><a href="{:U('Lottery/index')}">幸运大转盘</a></li>
+                <li><a href="#">诚佰跑跑团</a></li>
+                <li><a href="#">诚佰帮帮团</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

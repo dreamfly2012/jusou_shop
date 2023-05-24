@@ -1,0 +1,187 @@
+<include file="Public/header" title="发货配置" description="" keywords=""/>
+
+<include file="Public/leftnav_order"/>
+
+<div class="right_content table-responsive">
+
+    <table class="table table-striped table-bordered table_show">
+        <caption>确认收货信息及交易详情</caption>
+        <tr>
+            <th>
+                收货地址(<button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".consignee_address_modal">修改发货地址</button>)
+            </th>
+            <td>
+                <span id="receive_address">{$detail_address}</span>
+            </td>
+        </tr>
+
+    </table>
+
+    <table class="table table-striped table-bordered table_show">
+        <caption>确认发货/退货信息</caption>
+        <tbody>
+        <tr>
+            <th>
+                我的发货地址(<button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".address_deliver_modal">修改发货地址</button>)
+            </th>
+            <td>
+                <span id="deliver_address">{$deliver_default_address}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                我的退货地址(<button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".address_refund_modal">修改退货地址</button>)
+            </th>
+            <td>
+                <span id="return_address">{$refund_default_address}</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div>
+    <form action="{:U('Order/order')}" method="post">
+        <h3>选择物流服务</h3>
+
+        <ul class="nav nav-tabs">
+            <!--<li><a href="#online" data-toggle="tab">在线下单</a></li>-->
+            <li><a href="#self" data-toggle="tab">物流发货已确认</a></li>
+            <!--<li><a href="#none" data-toggle="tab">无需物流</a></li>-->
+        </ul>
+
+        <div class="tab-content">
+            <!--<div class="tab-pane active" id="online">TODO: 物流信息 </div>-->
+            <div class="tab-pane active" id="self">
+                <!--TODO：物流接口暂未开发，直接确定-->
+                <input type="submit" name="self" class="btn btn-default" value="确认发货"/>
+            </div>
+            <!--<div class="tab-pane" id="none">
+                TODO：虚拟物品，直接确认即可
+                <input type="submit" name="none" class="btn btn-default" value="确认发货" />
+            </div>-->
+        </div>
+        <input type="hidden" name="method" value="deliver" />
+    </form>
+    </div>
+
+
+
+    <div class="modal fade consignee_address_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">收货人信息编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <include file="Public/consignee_address" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary confirm">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade address_deliver_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">发货地址编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="address_deliver_list">
+                            已有发货地址
+                        </label>
+                        <select name="address_deliver_list" id="address_deliver_list">
+                            <option value="">请选择</option>
+                            <foreach name="address_deliver_list" key="key" item="address">
+                                <option value="{$address.address_id}">{$address.address_name}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary confirm_deliver_address">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+    <div class="modal fade address_refund_modal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">退货地址编辑</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="address_refund_list">
+                            已有退货地址
+                        </label>
+                        <select name="address_refund_list" id="address_refund_list">
+                            <option value="">请选择</option>
+                            <foreach name="address_refund_list" key="key" item="address">
+                                <option value="{$address.address_id}">{$address.address_name}</option>
+                            </foreach>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary confirm_refund_address">确认</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+</div>
+<style>
+
+</style>
+
+<script>
+    var __CONFIRM_DELIVER_ADDRESS__ = "{:U('Address/addressDeliverHandle')}";
+    var __CONFIRM_REFUND_ADDRESS__   = "{:U('Address/addressRefundHandle')}";
+
+    $(document).ready(function(){
+        $(".confirm_deliver_address").click(function(){
+            $.ajax({
+                url: __CONFIRM_DELIVER_ADDRESS__,
+                type: "POST",
+                data: { 'address_id': $("#address_deliver_list").val()},
+                dataType: "html",
+                success: function(data){
+                    if(data!=""){
+                        $("#deliver_address").html(data);
+                    }
+                    $(".address_deliver_modal").modal('hide');
+                }
+            });
+        });
+
+        $(".confirm_refund_address").click(function(){
+            $.ajax({
+                url: __CONFIRM_REFUND_ADDRESS__,
+                type: "POST",
+                data: { 'address_id': $("#address_refund_list").val()},
+                dataType: "html",
+                success: function(data){
+                    if(data!=""){
+                        $("#refund_address").html(data);
+                    }
+                    $(".address_refund_modal").modal('hide');
+                }
+            });
+        });
+    });
+</script>
+
+<include file="Public/footer"/>

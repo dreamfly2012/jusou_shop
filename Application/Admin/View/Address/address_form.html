@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="row">
+        <div classs="col-md-12">
+            <div class="form-group">
+                <label>收货地址</label>
+                <select name="province" id="province">
+                    <foreach name="province_list" item="province">
+                        <option value="{$province.region_id}" <if condition="$province['region_id'] eq $address['province']">selected='selected'</if>>{$province.region_name}</option>
+                    </foreach>
+                </select>
+                <select name="city" id="city">
+                    <foreach name="city_list" item="city">
+                        <option value="{$city.region_id}" <if condition="$city['region_id'] eq $address['city']">selected='selected'</if>>{$city.region_name}</option>
+                    </foreach>
+                </select>
+                <select name="district" id="district">
+                    <foreach name="district_list" item="district">
+                        <option value="{$district.region_id}" <if condition="$district['region_id'] eq $address['district']">selected='selected'</if>>{$district.region_name}</option>
+                    </foreach>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="consignee">详细地址</label>
+                <input type="text" name="address" class="form-control" id="address" value="{$address.address}"/>
+            </div>
+            <div class="form-group">
+                <label for="consignee">联系人</label>
+                <input type="text" name="consignee" class="form-control" id="consignee" value="{$address.consignee}"/>
+            </div>
+            <div class="form-group">
+                <label for="telephone">电话号码</label>
+                <input type="text" name="telephone" class="form-control" id="telephone" value="{$address.telephone}" />
+            </div>
+            <div class="form-group">
+                <label for="postcode">邮编</label>
+                <input name="postcode" class="form-control" id="postcode" value="{$address.postcode}"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div classs="col-md-12">
+            <input type="hidden" name="address_id" value="{$address.address_id}">
+            <input type="submit" value="确定" class="form-control btn btn-default"><br><br>
+            <input type="reset" value="重置" class="form-control btn btn-default">
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/Admin/jqvalidate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/Admin/jqvalidate/messages_zh.min.js"></script>
+<script>
+
+   var __CHANGE_PROVINCE_URL__ = "{:U('Address/addressChangeProvince')}";
+   var __CHANGE_CITY_URL__ = "{:U('Address/addressChangeCity')}";
+
+   $(document).ready(function(){
+       $("#myform").validate({
+           rules: {
+               province: {
+                   required: true
+               },
+               city:{
+                   required:true
+               },
+               district:{
+                   required:true
+               },
+               address:{
+                   required:true
+               },
+               telephone:{
+                   required:true
+               },
+               postcode:{
+                   required:true
+               }
+            }
+       });
+       $("#province").change(function(){
+            var province = $("#province option:selected").val();
+            $.ajax({
+                url: __CHANGE_PROVINCE_URL__,
+                type: "POST",
+                data: {'province':province},
+                dataType: "html",
+                success: function(data){
+                    $("#city").html(data);
+                    $('#district').html('');
+                }
+            });
+        });
+       $("#city").change(function(){
+           var city = $("#city option:selected").val();
+           $.ajax({
+               url: __CHANGE_CITY_URL__,
+               type: "POST",
+               data: {'city':city},
+               dataType: "html",
+               success: function(data){
+                    $("#district").html(data);
+               }
+           });
+       });
+   });
+</script>

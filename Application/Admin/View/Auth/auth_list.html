@@ -1,0 +1,24 @@
+<include file="Public/header" title="权限管理" description="" keywords="" />
+
+<include file="Public/leftnav_auth" />
+
+<div class="right_content">
+    <div class="container">
+        <h2><a href="{:U('Auth/authAddGroup')}" class="btn-default btn">添加权限组</a></h2>
+        <table class="table table-responsive table-bordered">
+            <tr>
+               <th>权限组</th>
+                <th>操作</th>
+            </tr>
+            <foreach name="auth_group" item="auth_group">
+            <tr>
+                <td>{$auth_group.title}</td>
+                <td><a href="{:U('Auth/authRules',array('id'=>$auth_group['id']))}">[权限]</a><a href="{:U('Auth/authRole',array('id'=>$auth_group['id']))}">[成员]</a></td>
+            </tr>
+            </foreach>
+        </table>
+    </div>
+
+</div>
+
+<include file="Public/footer" />

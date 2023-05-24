@@ -1,0 +1,61 @@
+<div class="form-group">
+    <label for="name">名称：</label>
+    <span><input type="text" name="name" id="name" value="{$coupon.name}" class="form-control" /></span>
+</div>
+
+<div class="form-group">
+    <label for="coupon_code">兑换码：<a href="javascript:;" class="generate">生成唯一兑换码</a></label>
+    <span><input type="text" name="coupon_code" id="coupon_code" value="{$coupon.coupon_code}" class="form-control" /></span>
+</div>
+
+<div class="form-group">
+    <label for="pay_points">兑换分数：</label>
+    <input type="text" name="pay_points" id="pay_points" class="form-control" value="{$coupon.pay_points}" />
+</div>
+
+<div class="form-group">
+    <label for="validate_date">有效期：</label>
+    <input type="text" name="validate_date" id="validate_date" class="form-control" value="{$coupon.validate_date|date='Y-m-d H:i:s',###}"/>
+</div>
+
+<div class="form-group">
+    <label for="status">是否可用:</label>
+    <select name="status" id="status" class="form-control">
+        <foreach name="choice_statuses" item="choice">
+            <option value="{$choice.value}" <if condition="$choice['value'] eq $coupon['status']">selected="selected"</if>>{$choice.name}</option>
+        </foreach>
+    </select>
+</div>
+
+<div class="form-group">
+    <input type="hidden" name="id" value="{$coupon.id}">
+    <input type="submit" value=" 确定 " class="form-control btn btn-primary">
+</div>
+
+<script type="text/javascript" src="__PUBLIC__/Admin/timepicker/js/jquery-ui-timepicker-addon.js"></script>
+<script>
+    var __GENERATE_CODE_URL__ = "{:U('Coupon/generateCode')}";
+    $(document).ready(function(){
+        $("#validate_date").datetimepicker({
+            timeFormat: 'HH:mm:ss',
+            dateFormat: 'yy-mm-dd'
+        });
+
+        $(".generate").click(function(){
+            $.ajax({
+                url: __GENERATE_CODE_URL__,
+                type: "POST",
+                dataType: "json",
+                success: function (data) {
+                    if(data.message=="success"){
+                        alert("生成兑换券成功！");
+                        $("#coupon_code").val(data.info);
+                    }else{
+                        alert("生成兑换券失败");
+                    }
+
+                }
+            });
+        });
+    });
+</script>

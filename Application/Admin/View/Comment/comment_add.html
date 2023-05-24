@@ -1,0 +1,14 @@
+<include file="Public/header" title="评论添加" description="" keywords="" />
+
+<include file="Public/leftnav_comment" />
+
+<div class="right_content">
+    <div class="container">
+        <h2>评论添加</h2>
+        <form name="form" id="form" enctype="multipart/form-data" action="{:U('Comment/addComment')}" method="post" class="form" role="form">
+            <include file="comment_form" />
+        </form>
+    </div>
+</div>
+
+<include file="Public/footer" />
